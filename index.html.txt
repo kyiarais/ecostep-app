@@ -1,0 +1,490 @@
+<!-- Login Screen -->
+<div id="loginScreen" class="hidden min-h-screen gradient-bg flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-md card-shadow">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Selamat Datang di EcoStep</h2>
+            <p class="text-green-600 font-medium text-lg mb-4">Langkahmu Nafas Baru untuk Indonesia</p>
+            <p class="text-gray-600">Daftar akun untuk memulai perjalanan hijau Anda</p>
+        </div>
+        
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                <input 
+                    type="text" 
+                    id="fullNameInput"
+                    placeholder="Masukkan nama lengkap sesuai KTP"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
+                <input 
+                    type="date" 
+                    id="birthDateInput"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">NIK (Nomor Induk Kependudukan)</label>
+                <input 
+                    type="text" 
+                    id="nikInput"
+                    placeholder="Masukkan 16 digit NIK"
+                    maxlength="16"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+                <p class="text-xs text-gray-500 mt-1">Contoh: 1234567890123456</p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Alamat Email</label>
+                <input 
+                    type="email" 
+                    id="emailInput"
+                    placeholder="contoh@email.com"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Ponsel (Opsional)</label>
+                <input 
+                    type="tel" 
+                    id="phoneInput"
+                    placeholder="08XXXXXXXXXX"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Kata Sandi</label>
+                <input 
+                    type="password" 
+                    id="passwordInput"
+                    placeholder="Minimal 8 karakter"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+            </div>
+            
+            <button 
+                type="submit"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition-all duration-200 transform hover:scale-105"
+            >
+                Daftar ke EcoStep
+            </button>
+        </form>
+        
+        <p class="text-center text-sm text-gray-500 mt-6">
+            Sudah punya akun? <a href="#" class="text-green-600 font-medium">Masuk ke akun</a>
+        </p>
+    </div>
+</div>
+
+<!-- Main Dashboard -->
+<div id="dashboard" class="hidden min-h-screen bg-green-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white p-6 rounded-b-3xl">
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h1 class="text-xl font-bold">Halo, <span id="userName">Pengguna</span>!</h1>
+                <p class="text-green-100">Mari mulai langkah hijau hari ini</p>
+            </div>
+            <div class="text-right">
+                <div class="bg-white bg-opacity-20 rounded-xl px-3 py-2">
+                    <p class="text-sm">Total Poin</p>
+                    <p class="text-2xl font-bold" id="totalPoints">0</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Card -->
+    <div class="p-6">
+        <div class="bg-white rounded-3xl p-6 card-shadow mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Progres Hari Ini</h3>
+            
+            <!-- Steps Counter -->
+            <div class="text-center mb-6">
+                <div class="text-5xl font-bold text-green-600 mb-2 step-counter" id="stepCount">0</div>
+                <p class="text-gray-600">dari 10.000 langkah target</p>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-3 mt-4">
+                    <div class="progress-bar h-3 rounded-full" id="progressBar" style="width: 0%"></div>
+                </div>
+                
+                <div class="flex justify-between text-sm text-gray-500 mt-2">
+                    <span>0</span>
+                    <span id="currentPoints">0 poin</span>
+                    <span>100 poin</span>
+                </div>
+            </div>
+
+            <!-- Main Action Button -->
+            <button 
+                id="startWalkingBtn"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-2xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
+            >
+                <span id="btnText">🚶‍♀️ MULAI BERJALAN</span>
+            </button>
+
+            <!-- Timer Display (Hidden initially) -->
+            <div id="timerDisplay" class="hidden text-center mt-4">
+                <div class="bg-green-100 rounded-xl p-4">
+                    <p class="text-sm text-gray-600 mb-1">Waktu Berjalan</p>
+                    <p class="text-2xl font-bold text-green-600" id="walkTimer">00:00:00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="bg-white rounded-3xl p-6 card-shadow mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Pencapaian Hari Ini</h3>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2" id="achievement100">
+                        <span class="text-green-600 font-bold">100</span>
+                    </div>
+                    <p class="text-xs text-gray-600">1 Poin</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2" id="achievement5000">
+                        <span class="text-gray-500 font-bold">5K</span>
+                    </div>
+                    <p class="text-xs text-gray-600">50 Poin</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2" id="achievement10000">
+                        <span class="text-gray-500 font-bold">10K</span>
+                    </div>
+                    <p class="text-xs text-gray-600">100 Poin</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rewards Section -->
+        <div class="bg-white rounded-3xl p-6 card-shadow">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Tukar Poin</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white text-lg">📱</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">Pulsa Rp5.000</p>
+                            <p class="text-sm text-gray-600">100 poin</p>
+                        </div>
+                    </div>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium">Tukar</button>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white text-lg">🚇</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">Tiket MRT/KRL</p>
+                            <p class="text-sm text-gray-600">1.000 poin</p>
+                        </div>
+                    </div>
+                    <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg text-sm font-medium">Belum Cukup</button>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-orange-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white text-lg">🛍️</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">Diskon UMKM Rp25.000</p>
+                            <p class="text-sm text-gray-600">10.000 poin</p>
+                        </div>
+                    </div>
+                    <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg text-sm font-medium">Belum Cukup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-3">
+        <div class="flex justify-around">
+            <button class="flex flex-col items-center p-2 text-green-600">
+                <span class="text-lg mb-1">🏠</span>
+                <span class="text-xs font-medium">Beranda</span>
+            </button>
+            <button class="flex flex-col items-center p-2 text-gray-400">
+                <span class="text-lg mb-1">🎁</span>
+                <span class="text-xs">Hadiah</span>
+            </button>
+            <button class="flex flex-col items-center p-2 text-gray-400">
+                <span class="text-lg mb-1">📊</span>
+                <span class="text-xs">Statistik</span>
+            </button>
+            <button class="flex flex-col items-center p-2 text-gray-400">
+                <span class="text-lg mb-1">👤</span>
+                <span class="text-xs">Profil</span>
+            </button>
+        </div>
+    </nav>
+</div>
+
+<!-- Countdown Modal -->
+<div id="countdownModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-8 text-center">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Bersiap untuk Mulai!</h3>
+        <div class="text-8xl font-bold text-green-600 mb-4" id="countdownNumber">3</div>
+        <p class="text-gray-600">Pastikan ponsel Anda siap untuk menghitung langkah</p>
+    </div>
+</div>
+
+<!-- Achievement Modal -->
+<div id="achievementModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-8 text-center max-w-sm mx-4">
+        <div class="text-6xl mb-4">🎉</div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">Selamat!</h3>
+        <p class="text-gray-600 mb-4" id="achievementText">Anda telah mencapai milestone!</p>
+        <button onclick="closeAchievementModal()" class="bg-green-600 text-white px-6 py-2 rounded-xl font-medium">
+            Lanjutkan
+        </button>
+    </div>
+</div>
+
+<script>
+    let currentSteps = 0;
+    let currentPoints = 0;
+    let isWalking = false;
+    let walkingInterval;
+    let timerInterval;
+    let walkStartTime;
+    let userName = '';
+
+    // Show splash screen for 3 seconds
+    setTimeout(() => {
+        document.getElementById('splashScreen').classList.add('hidden');
+        document.getElementById('loginScreen').classList.remove('hidden');
+    }, 3000);
+
+    // Registration form handler
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const fullName = document.getElementById('fullNameInput').value;
+        const birthDate = document.getElementById('birthDateInput').value;
+        const nik = document.getElementById('nikInput').value;
+        const email = document.getElementById('emailInput').value;
+        const password = document.getElementById('passwordInput').value;
+        
+        // Validation
+        if (!fullName || fullName.length < 3) {
+            document.getElementById('fullNameInput').classList.add('shake');
+            setTimeout(() => {
+                document.getElementById('fullNameInput').classList.remove('shake');
+            }, 500);
+            return;
+        }
+        
+        if (!birthDate) {
+            document.getElementById('birthDateInput').classList.add('shake');
+            setTimeout(() => {
+                document.getElementById('birthDateInput').classList.remove('shake');
+            }, 500);
+            return;
+        }
+        
+        if (nik.length !== 16 || !/^\d+$/.test(nik)) {
+            document.getElementById('nikInput').classList.add('shake');
+            setTimeout(() => {
+                document.getElementById('nikInput').classList.remove('shake');
+            }, 500);
+            return;
+        }
+        
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('emailInput').classList.add('shake');
+            setTimeout(() => {
+                document.getElementById('emailInput').classList.remove('shake');
+            }, 500);
+            return;
+        }
+        
+        if (password.length < 8) {
+            document.getElementById('passwordInput').classList.add('shake');
+            setTimeout(() => {
+                document.getElementById('passwordInput').classList.remove('shake');
+            }, 500);
+            return;
+        }
+        
+        // Extract name for display
+        userName = fullName.split(' ')[0];
+        document.getElementById('userName').textContent = userName;
+        
+        // Transition to dashboard
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+    });
+
+    // Start walking button handler
+    document.getElementById('startWalkingBtn').addEventListener('click', function() {
+        if (!isWalking) {
+            startCountdown();
+        } else {
+            stopWalking();
+        }
+    });
+
+    function startCountdown() {
+        document.getElementById('countdownModal').classList.remove('hidden');
+        let count = 2;
+        document.getElementById('countdownNumber').textContent = count;
+        
+        const countdownInterval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                document.getElementById('countdownNumber').textContent = count;
+            } else if (count === 0) {
+                document.getElementById('countdownNumber').textContent = 'Mulai!';
+            } else {
+                clearInterval(countdownInterval);
+                document.getElementById('countdownModal').classList.add('hidden');
+                startWalking();
+            }
+        }, 1000);
+    }
+
+    function startWalking() {
+        isWalking = true;
+        walkStartTime = Date.now();
+        
+        // Update button
+        document.getElementById('btnText').textContent = '⏸️ BERHENTI BERJALAN';
+        document.getElementById('startWalkingBtn').classList.remove('bg-green-600', 'hover:bg-green-700');
+        document.getElementById('startWalkingBtn').classList.add('bg-red-600', 'hover:bg-red-700');
+        
+        // Show timer
+        document.getElementById('timerDisplay').classList.remove('hidden');
+        
+        // Start step simulation (every 500ms add 1-3 steps)
+        walkingInterval = setInterval(() => {
+            const stepIncrement = Math.floor(Math.random() * 3) + 1;
+            currentSteps += stepIncrement;
+            updateStepDisplay();
+            
+            // Create floating particle effect
+            createFloatingParticle();
+            
+            // Check achievements
+            checkAchievements();
+        }, 500);
+        
+        // Start timer
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function stopWalking() {
+        isWalking = false;
+        clearInterval(walkingInterval);
+        clearInterval(timerInterval);
+        
+        // Update button
+        document.getElementById('btnText').textContent = '🚶‍♀️ MULAI BERJALAN';
+        document.getElementById('startWalkingBtn').classList.remove('bg-red-600', 'hover:bg-red-700');
+        document.getElementById('startWalkingBtn').classList.add('bg-green-600', 'hover:bg-green-700');
+        
+        // Hide timer
+        document.getElementById('timerDisplay').classList.add('hidden');
+    }
+
+    function updateStepDisplay() {
+        document.getElementById('stepCount').textContent = currentSteps.toLocaleString();
+        document.getElementById('stepCount').classList.add('step-counter');
+        
+        setTimeout(() => {
+            document.getElementById('stepCount').classList.remove('step-counter');
+        }, 500);
+        
+        // Calculate points (every 100 steps = 1 point)
+        currentPoints = Math.floor(currentSteps / 100);
+        if (currentSteps >= 10000) currentPoints = 100;
+        else if (currentSteps >= 5000) currentPoints = 50;
+        
+        document.getElementById('currentPoints').textContent = currentPoints + ' poin';
+        document.getElementById('totalPoints').textContent = currentPoints;
+        
+        // Update progress bar
+        const progress = Math.min((currentSteps / 10000) * 100, 100);
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function updateTimer() {
+        const elapsed = Date.now() - walkStartTime;
+        const hours = Math.floor(elapsed / 3600000);
+        const minutes = Math.floor((elapsed % 3600000) / 60000);
+        const seconds = Math.floor((elapsed % 60000) / 1000);
+        
+        const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('walkTimer').textContent = timeString;
+    }
+
+    function checkAchievements() {
+        if (currentSteps >= 100 && currentSteps < 200) {
+            updateAchievementBadge('achievement100', true);
+            showAchievement('Hebat! Anda telah mencapai 100 langkah pertama!');
+        }
+        if (currentSteps >= 5000 && currentSteps < 5100) {
+            updateAchievementBadge('achievement5000', true);
+            showAchievement('Luar biasa! Anda telah mencapai 5.000 langkah dan mendapat 50 poin!');
+        }
+        if (currentSteps >= 10000 && currentSteps < 10100) {
+            updateAchievementBadge('achievement10000', true);
+            showAchievement('Fantastis! Anda telah mencapai target WHO 10.000 langkah dan mendapat 100 poin!');
+        }
+    }
+
+    function updateAchievementBadge(badgeId, achieved) {
+        const badge = document.getElementById(badgeId);
+        if (achieved) {
+            badge.classList.remove('bg-gray-200');
+            badge.classList.add('bg-green-500', 'success-ping');
+            badge.querySelector('span').classList.remove('text-gray-500');
+            badge.querySelector('span').classList.add('text-white');
+        }
+    }
+
+    function showAchievement(text) {
+        document.getElementById('achievementText').textContent = text;
+        document.getElementById('achievementModal').classList.remove('hidden');
+    }
+
+    function closeAchievementModal() {
+        document.getElementById('achievementModal').classList.add('hidden');
+    }
+
+    function createFloatingParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'floating-particles';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = window.innerHeight - 100 + 'px';
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 3000);
+    }
+
+    // NIK input formatting
+    document.getElementById('nikInput').addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+    });
+
+    // Phone input formatting
+    document.getElementById('phoneInput').addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+    });
+</script>
